@@ -2,8 +2,10 @@
   <!-- modal창 -->
   <div class="black-bg" v-if="modalHandler === true">
     <div class="white-bg">
-      <h4>상세페이지</h4>
-      <p>상세내용</p>
+      <h4>{{ products[clickData].title }}</h4>
+      <img :src="products[clickData].image" />
+      <p>{{ products[clickData].content }}</p>
+      <p>{{ products[clickData].price }}</p>
       <button @click="modalHandler = false">닫기</button>
     </div>
   </div>
@@ -12,15 +14,23 @@
   <div class="menu">
     <a v-for="menu in menus" :key="menu">{{ menu }}</a>
   </div>
-  <!-- <div v-for="(product, index) in products" :key="index">
-    <h4>{{ product }}</h4>
-    <p>50 만원</p>
-  </div> -->
-
   <!-- 상품 -->
-  <div>
+  <div v-for="(product, index) in products" :key="index">
+    <img :src="product.image" class="room-img" />
+    <h4
+      @click="
+        modalHandler = true;
+        clickData = index;
+      "
+    >
+      {{ product.title }}
+    </h4>
+    <p>{{ product.price }} 원</p>
+  </div>
+
+  <!-- <div>
     <img src="./assets/room0.jpg" class="room-img" />
-    <h4 @click="modalHandler = true">{{ products[0] }}</h4>
+    <h4 @click="modalHandler = true">{{ products[0].title }}</h4>
     <p>50 만원</p>
     <button v-on:click="count[0]++">허위매물신고</button>
     <span>신고수 : {{ count[0] }}</span>
@@ -38,18 +48,21 @@
     <p>70 만원</p>
     <button @click="count[2]++">허위매물신고</button>
     <span>신고수 : {{ count[2] }}</span>
-  </div>
+  </div> -->
 </template>
 
 <script>
+import data from "./assets/data";
+
 export default {
   name: "App",
   data() {
     return {
+      clickData: 0,
       modalHandler: false,
       count: [0, 0, 0],
       menus: ["Home", "Products", "About"],
-      products: ["역삼동원룸", "천호동원룸", "마포구원룸"],
+      products: data,
     };
   },
   methods: {},
