@@ -19,6 +19,10 @@
   <!-- 배너 -->
   <DiscountBanner />
 
+  <!-- 정렬버튼 -->
+  <button @click="priceSort">가격순정렬</button>
+  <button @click="sortBack">되돌리기</button>
+
   <!-- 상품 -->
   <CardItem
     @openModal="
@@ -46,7 +50,18 @@ export default {
       count: [0, 0, 0],
       menus: ["Home", "Products", "About"],
       products: data,
+      productsorigin: [...data],
     };
+  },
+  methods: {
+    priceSort() {
+      this.products.sort(function (a, b) {
+        return a.price - b.price;
+      });
+    },
+    sortBack() {
+      this.products = [...this.productsorigin];
+    },
   },
   components: { DiscountBanner, ModalContent, CardItem },
 };
