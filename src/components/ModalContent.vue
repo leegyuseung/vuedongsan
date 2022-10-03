@@ -5,15 +5,16 @@
       <h4>{{ products[clickData].title }}</h4>
       <img :src="products[clickData].image" />
       <p>{{ products[clickData].content }}</p>
-      <p>{{ products[clickData].price }} 원</p>
-      <DiscountBanner />
+      <!-- <input @input="month = $event.target.value" /> -->
+      <!-- <textarea v-model='month' /> -->
+      <input v-model.number="month" />
+      <p>{{ month }}개월 선택함 : {{ products[clickData].price * month }} 원</p>
       <button @click="close">닫기</button>
     </div>
   </div>
 </template>
 
 <script>
-import DiscountBanner from "./DiscountBanner.vue";
 export default {
   name: "ModalContent",
   props: {
@@ -21,12 +22,27 @@ export default {
     modalHandler: Boolean,
     clickData: Number,
   },
+  data() {
+    return {
+      month: 1,
+    };
+  },
   methods: {
     close() {
       this.$emit("closeModal");
     },
   },
-  components: { DiscountBanner },
+  watch: {
+    month(a) {
+      if (a >= 13) {
+        alert("13이상 입력하지 마셈");
+      }
+      if (typeof a !== "number") {
+        alert("숫자를 입력하세요");
+        a = 1;
+      }
+    },
+  },
 };
 </script>
 

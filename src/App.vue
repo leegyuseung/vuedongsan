@@ -1,11 +1,15 @@
 <template>
   <!-- 모달 -->
-  <ModalContent
-    :products="products"
-    :clickData="clickData"
-    :modalHandler="modalHandler"
-    @closeModal="modalHandler = false"
-  />
+  <!-- <div class="start" :class="{ end: modalHandler }"> -->
+  <Transition name="fade">
+    <ModalContent
+      :products="products"
+      :clickData="clickData"
+      :modalHandler="modalHandler"
+      @closeModal="modalHandler = false"
+    />
+  </Transition>
+  <!-- </div> -->
 
   <!-- nav -->
   <div class="menu">
@@ -54,6 +58,37 @@ body {
 }
 div {
   box-sizing: border-box;
+}
+/* 투명 애니메이션 */
+/* .start {
+  opacity: 0;
+  transition: all 1s;
+}
+.end {
+  opacity: 1;
+} */
+
+/* 시작 */
+.fade-enter-from {
+  opacity: 0;
+}
+.fade-enter-actiove {
+  transition: all 1s;
+}
+/* 끝 */
+.fade-enter-to {
+  opacity: 1;
+}
+
+/* 퇴장 */
+.fade-leave-from {
+  opacity: 0;
+}
+.fade-leave-actiove {
+  transition: all 1s;
+}
+.fade-leave-to {
+  opacity: 1;
 }
 
 .menu {
