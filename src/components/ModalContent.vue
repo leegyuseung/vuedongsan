@@ -42,6 +42,11 @@ export default {
         a = 1;
       }
     },
+    beforeUpdate() {
+      if (this.month === 2) {
+        alert("2개월은 너무 적어 안팝니다.");
+      }
+    },
   },
 };
 </script>

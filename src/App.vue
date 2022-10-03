@@ -17,7 +17,7 @@
   </div>
 
   <!-- 배너 -->
-  <DiscountBanner />
+  <DiscountBanner v-if="showDiscount === true" />
 
   <!-- 정렬버튼 -->
   <button @click="priceSort">가격순정렬</button>
@@ -45,6 +45,7 @@ export default {
   name: "App",
   data() {
     return {
+      showDiscount: true,
       clickData: 0,
       modalHandler: false,
       count: [0, 0, 0],
@@ -63,6 +64,11 @@ export default {
       this.products = [...this.productsorigin];
     },
   },
+  // mounted() {
+  //   setTimeout(() => {
+  //     this.showDiscount = false;
+  //   }, 2000);
+  // },
   components: { DiscountBanner, ModalContent, CardItem },
 };
 </script>
